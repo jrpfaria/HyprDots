@@ -3,4 +3,5 @@
     "breadcrumbs.enabled": false,
     "breadcrumbs.icons": false,
     "editor.minimap.enabled": false,
+    "files.autoSave": "afterDelay",
 }

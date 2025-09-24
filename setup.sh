@@ -145,6 +145,8 @@ PACKAGES=(
     "jdk21-openjdk"
     "opentabletdriver-git"
     "lutris"
+    "fd"
+    "ripgrep"
 )
 
 clear
@@ -246,7 +248,7 @@ fi
 
 # # Create the config directories
 echo -e "$COK - Creating Config Directories..."
-CONFIG_DIRECTORIES=( "dconf" "end-rs" "eww" "gtk-3.0" "hypr" "kitty" "fastfetch" "qt5ct" "swaylock" "Thunar" "xfce4" "Code/User" "wallpapers" "mako/icons" "btop/themes")
+CONFIG_DIRECTORIES=( "dconf" "end-rs" "eww" "gtk-3.0" "hypr" "kitty" "fastfetch" "qt5ct" "swaylock" "yazi" "xfce4" "Code/User" "wallpapers" "mako/icons" "btop/themes")
 for DIR in ${CONFIG_DIRECTORIES[@]};
 do
     mkdir -p ~/.config/$DIR
@@ -270,9 +272,8 @@ ln -sf $PWD/Dotfiles/waybar/conf/config.jsonc ~/.config/waybar/config.jsonc
 ln -sf $PWD/Dotfiles/waybar/style/style.css ~/.config/waybar/style.css
 ln -sf $PWD/Dotfiles/wofi/config ~/.config/wofi/config
 ln -sf $PWD/Dotfiles/wofi/style/style.css ~/.config/wofi/style.css_
-ln -sf $PWD/Themes/GTK/Tokyo-Night/Tokyonight-Storm-BL-LB  ~/.themes/Tokyonight-Storm-BL-LB
 ln -sf $PWD/Themes/GTK/Graphite-Dark  ~/.themes/Graphite-Dark
-ln -sf $PWD/Dotfiles/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini && gsettings set org.gnome.desktop.interface gtk-theme "Tokyonight-Storm-BL-LB" && gsettings set org.gnome.desktop.wm.preferences theme "Tokyonight-Storm-BL-LB"
+ln -sf $PWD/Dotfiles/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini && gsettings set org.gnome.desktop.interface gtk-theme "Graphite-Dark" && gsettings set org.gnome.desktop.wm.preferences theme "Graphite-Dark"
 ln -sf $PWD/Dotfiles/hypr/hyprland.conf ~/.config/hypr/hyprland.conf
 ln -sf $PWD/Dotfiles/zsh/.zshrc ~/.zshrc
 ln -sf $PWD/Dotfiles/zsh/.p10k.zsh ~/.p10k.zsh
@@ -281,17 +282,12 @@ ln -sf $PWD/Dotfiles/scripts/swww ~/.scripts/swww
 ln -sf $PWD/Dotfiles/scripts/updater ~/.scripts/updater
 ln -sf $PWD/Dotfiles/scripts/mediaplayer.py ~/.scripts/mediaplayer.py
 ln -sf $PWD/Dotfiles/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc
-ln -sf $PWD/Assets/ASCII/cat.txt ~/.config/fastfetch/cat.txt
-ln -sf $PWD/Assets/ASCII/dog.txt ~/.config/fastfetch/dog.txt
-ln -sf $PWD/Assets/ASCII/punpun.txt ~/.config/fastfetch/punpun.txt
-ln -sf $PWD/Assets/ASCII/mac.txt ~/.config/fastfetch/mac.txt
+ln -sf $PWD/Assets/punpun.txt ~/.config/fastfetch/punpun.txt
 ln -sf $PWD/Dotfiles/rtorrent.rc ~/.rtorrent.rc
-ln -sf $PWD/Dotfiles/Thunar/accels.scm ~/.config/Thunar/accels.scm
-ln -sf $PWD/Dotfiles/Thunar/ucl.xml ~/.config/Thunar/ucl.xml
+ln -sf $PWD/Dotfiles/yazi/yazi.toml ~/.config/yazi/yazi.toml
 ln -sf $PWD/Dotfiles/vscode/settings.json ~/.config/Code/User/settings.json
 ln -sf $PWD/Dotfiles/wallpapers/desktop-background.png ~/.config/wallpapers/desktop-background.png
 ln -sf $PWD/Dotfiles/btop/btop.conf ~/.config/btop/btop.conf
-ln -sf $PWD/Themes/btop/tokyo-storm.theme ~/.config/btop/themes/tokyo-storm.theme
 ln -sf $PWD/Dotfiles/end-rs/config.toml ~/.config/end-rs/config.toml
 ln -sf $PWD/Dotfiles/eww ~/.config/eww
 
