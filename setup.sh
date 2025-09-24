@@ -10,67 +10,144 @@ CAC="[\e[1;33mACTION\e[0m]"
 
 PACKAGES=(
     "linux-headers"
+    "linux-firmware"
     "git"
     "qt5-wayland"
+    "qt6-wayland"
     "qt5ct"
-    "libva"
-    "hyprland"
     "kitty"
-    "waybar"
     "jq"
+    "python-requests"
+
+# Audio
+    "pipewire"
+    "lib32-pipewire"
+    "pipewire-audio"
+    "pipewire-docs"
+    "pipewire-alsa"
+    "pipewire-pulse"
+    "wireplumber"
+    "qpwgraph"
+    "pamixer"
+    "pwvucontrol"
+    "easyeffects"
+    "lsp-plugins-lv2"
+    "pipewire-jack"
+    "lib32-pipewire-jack"
+    "wiremix"
+
+# HyprLand
+    "eww"
     "mako"
     "swww"
     "sway"
     "swaylock-effects"
     "swayidle"
-    "wofi"
-    "xdg-desktop-portal-hyprland"
+    "vicinae-bin"
     "swappy"
     "grim"
     "slurp"
-    "thunar"
-    "thunar-archive-plugin"
-    "polkit-gnome"
-    "python-requests"
-    "pamixer"
-    "pavucontrol"
-    "bluez"
-    "bluez-utils"
-    "blueman"
+    "yazi"
+    "polkit-kde-agent"
+    "hyprland"
+    "xdg-desktop-portal-hyprland"
+    "hyprshell"
+
+#Networking
     "network-manager-applet"
     "networkmanager-openvpn"
-    "obs-studio"
     "openssh"
-    "gvfs"
-    "file-roller"
-    "btop"
-    "pacman-contrib"
+    "zerotier-one"
+
+# Fonts
     "ttf-jetbrains-mono-nerd"
+    "ttf-bitstream-vera"
+    "ttf-dejavu"
+    "ttf-opensans"
     "noto-fonts-emoji"
+    "noto-fonts-cjk"
+    "noto-fonts-extra"
+
+# Boot
+    "grub"
+    "os-prober"
+    "efibootmgr"
+
+# AMD Stuff
+    "amd-ucode"
+    "amdgpu_top"
+    "corectrl"
+
+# Certificates
+    "ca-certificates"
+    "ca-certificates-mozilla"
+    "ca-certificates-utils"
+
+# Graphic Drivers
+    "mesa"
+    "lib32-mesa"
+    "vulkan-radeon"
+    "lib32-vulkan-radeon"
+    "xf86-video-amdgpu"
+    "libva-mesa-driver"
+    "lib32-libva-mesa-driver"
+    "libva"
+
+# Waydroid
+    "waydroid"
+    "python-gbinder"
+    "python-pyclip"
+
+# Misc packages
     "lxappearance"
     "xfce4-settings"
-    "sddm"
+    "sddm-git"
     "tree"
     "qt5-svg"
     "qt5-quickcontrols2"
     "qt5-graphicaleffects"
-    "rtorrent"
+    "qbittorrent"
     "firefox"
+    "chromium"
     "visual-studio-code-bin"
-    "neofetch"
-    "bitwarden-cli"
-    "bitwarden"
+    "fastfetch"
     "cifs-utils"
     "wget"
     "zsh"
     "nano"
-    "aws-cli-v2"
     "vault"
+    "man-db"
+    "man-pages"
+    "gvfs"
+    "file-roller"
+    "btop"
+    "pacman-contrib"
+    "obs-studio"
+    "wine-staging"
+    "openrazer-driver-dkms"
+    "steam-native-runtime"
+    "discord"
+    "mangohud"
+    "goverlay"
+    "gamemode"
+    "lib32-gamemode"
+    "gamescope"
+    "zenpower3-dkms"
+    "unzip"
+    "unrar"
+    "winetricks"
+    "protontricks"
+    "fuse2"
+    "ntfs-3g"
+    "spotify-adblock"
+    "wl-clipboard"
+    "flameshot-git"
+    "jdk21-openjdk"
+    "opentabletdriver-git"
+    "lutris"
 )
 
 clear
-
-
 
 #### Check for package manager ####
 echo -e "$CNT - Installing yay..."
@@ -96,7 +173,7 @@ install() {
     else
         # no package found so installing
         echo -e "$CNT - Now installing $1 ..."
-        yay -S --noconfirm $1 &>> $INSTLOG
+        yay -S --needed --noconfirm $1 &>> $INSTLOG
         # test to make sure package installed
         if yay -Q $1 &>> /dev/null ; then
             echo -e "\e[1A\e[K$COK - $1 was installed."
@@ -114,14 +191,10 @@ do
     install $PKG
 done
 
-# Start the bluetooth service
-echo -e "$CNT - Starting the Bluetooth Service..."
-sudo systemctl enable --now bluetooth.service &>> $INSTLOG
-sleep 2
-
-# Start the network manager applet service
-echo -e "$CNT - Starting the Network Manager Service..."
+# Start network services
+echo -e "$CNT - Starting the Network Services..."
 sudo systemctl enable --now NetworkManager.service
+sudo systemctl enable --now zerotier-one.service
 
 # Enable the sddm login manager service
 echo -e "$CNT - Enabling the SDDM Service..."
@@ -149,13 +222,15 @@ else
     sudo mkdir $WLDIR
 fi
 
+# Install GRUB theme
+echo -e "$CNT - Installing and configuration GRUB Virtuaverse Theme..."
+sudo $PWD/Dotfiles/grub/install_script_grub.sh &>> $INSTLOG
+
 # stage the .desktop file
 sudo cp $PWD/Tools/hyprland.desktop /usr/share/wayland-sessions/
-
 sudo sed -i 's/Exec=Hyprland/Exec=\/home\/'$USER'\/.start-hypr/' /usr/share/wayland-sessions/hyprland.desktop
 
 # Install and configure oh my zsh / theme / plugins
-
 if [ ! -d "~/.oh-my-zsh" ]
 then
     echo -e "$CNT - Installing and configuration Oh-My-Zsh..."
@@ -171,14 +246,13 @@ fi
 
 # # Create the config directories
 echo -e "$COK - Creating Config Directories..."
-CONFIG_DIRECTORIES=( "dconf" "gtk-3.0" "hypr" "kitty" "mako" "neofetch" "qt5ct" "swaylock" "Thunar" "waybar" "wofi" "xfce4" "Code/User" "wallpapers" "mako/icons" "btop/themes")
+CONFIG_DIRECTORIES=( "dconf" "end-rs" "eww" "gtk-3.0" "hypr" "kitty" "fastfetch" "qt5ct" "swaylock" "Thunar" "xfce4" "Code/User" "wallpapers" "mako/icons" "btop/themes")
 for DIR in ${CONFIG_DIRECTORIES[@]};
 do
     mkdir -p ~/.config/$DIR
 done
 
 # These config directories are not in the .config directory
-
 ROOT_DIRECTORIES=(".themes" ".scripts")
 for DIR in ${ROOT_DIRECTORIES[@]};
 do
@@ -188,7 +262,7 @@ done
 # Link the configs
 echo -e "$COK - Linking configurations..."
 ln -sf $PWD/Dotfiles/kitty/kitty.conf ~/.config/kitty/kitty.conf
-ln -sf $PWD/Dotfiles/kitty/tokyonight.conf ~/.config/kitty/tokyonight.conf
+ln -sf $PWD/Dotfiles/kitty/curr_theme.conf ~/.config/kitty/curr_theme.conf
 ln -sf $PWD/Dotfiles/mako/conf/config-dark ~/.config/mako/config
 cp -r $PWD/Dotfiles/mako/icons/* ~/.config/mako/icons/
 ln -sf $PWD/Dotfiles/swaylock/config ~/.config/swaylock/config
@@ -197,15 +271,20 @@ ln -sf $PWD/Dotfiles/waybar/style/style.css ~/.config/waybar/style.css
 ln -sf $PWD/Dotfiles/wofi/config ~/.config/wofi/config
 ln -sf $PWD/Dotfiles/wofi/style/style.css ~/.config/wofi/style.css_
 ln -sf $PWD/Themes/GTK/Tokyo-Night/Tokyonight-Storm-BL-LB  ~/.themes/Tokyonight-Storm-BL-LB
+ln -sf $PWD/Themes/GTK/Graphite-Dark  ~/.themes/Graphite-Dark
 ln -sf $PWD/Dotfiles/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini && gsettings set org.gnome.desktop.interface gtk-theme "Tokyonight-Storm-BL-LB" && gsettings set org.gnome.desktop.wm.preferences theme "Tokyonight-Storm-BL-LB"
 ln -sf $PWD/Dotfiles/hypr/hyprland.conf ~/.config/hypr/hyprland.conf
 ln -sf $PWD/Dotfiles/zsh/.zshrc ~/.zshrc
 ln -sf $PWD/Dotfiles/zsh/.p10k.zsh ~/.p10k.zsh
 ln -sf $PWD/Dotfiles/scripts/aliases ~/.scripts/aliases
 ln -sf $PWD/Dotfiles/scripts/swww ~/.scripts/swww
-ln -sf $PWD/Dotfiles/scripts/terraform ~/.scripts/terraform
 ln -sf $PWD/Dotfiles/scripts/updater ~/.scripts/updater
-ln -sf $PWD/Dotfiles/neofetch/config.conf ~/.config/neofetch/config.conf
+ln -sf $PWD/Dotfiles/scripts/mediaplayer.py ~/.scripts/mediaplayer.py
+ln -sf $PWD/Dotfiles/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc
+ln -sf $PWD/Assets/ASCII/cat.txt ~/.config/fastfetch/cat.txt
+ln -sf $PWD/Assets/ASCII/dog.txt ~/.config/fastfetch/dog.txt
+ln -sf $PWD/Assets/ASCII/punpun.txt ~/.config/fastfetch/punpun.txt
+ln -sf $PWD/Assets/ASCII/mac.txt ~/.config/fastfetch/mac.txt
 ln -sf $PWD/Dotfiles/rtorrent.rc ~/.rtorrent.rc
 ln -sf $PWD/Dotfiles/Thunar/accels.scm ~/.config/Thunar/accels.scm
 ln -sf $PWD/Dotfiles/Thunar/ucl.xml ~/.config/Thunar/ucl.xml
@@ -213,8 +292,9 @@ ln -sf $PWD/Dotfiles/vscode/settings.json ~/.config/Code/User/settings.json
 ln -sf $PWD/Dotfiles/wallpapers/desktop-background.png ~/.config/wallpapers/desktop-background.png
 ln -sf $PWD/Dotfiles/btop/btop.conf ~/.config/btop/btop.conf
 ln -sf $PWD/Themes/btop/tokyo-storm.theme ~/.config/btop/themes/tokyo-storm.theme
-
+ln -sf $PWD/Dotfiles/end-rs/config.toml ~/.config/end-rs/config.toml
+ln -sf $PWD/Dotfiles/eww ~/.config/eww
 
 
 echo -e "$COK - Installation Complete, Rebooting to Hyprland..."
-# sudo reboot 0
+sudo reboot 0

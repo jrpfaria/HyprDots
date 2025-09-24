@@ -1,0 +1,251 @@
+$borderRadius: 0.6em;
+
+$crustTransparent: rgba(37, 37, 37, 0.75);
+
+.bar {
+  box-shadow: 0 2px 3px 1px $tone950;
+  border-radius: 10px;
+  background-color: $crustTransparent;
+  padding: 3px;
+  margin: 6.5px;
+}
+
+.cpu-i,
+.mem-i,
+.up-i,
+.net-i,
+.aud-i,
+.clk-i {
+  background-color: $tone900;
+  color: $tone450;
+  padding: 0.3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 10px 0 0 10px;
+}
+
+.cpu-t1,
+.cpu-t2,
+.up-t,
+.mem-t,
+.net-t,
+.aud-t,
+.clk-t,
+.cava,
+.notif-hist {
+  background-color: $tone850;
+  color: $tone410;
+  padding-right: 12px;
+  padding-left: 12px;
+  border-radius: 0 10px 10px 0;
+}
+
+.workspace-container {
+  background-color: $tone850;
+  color: $tone410;
+  border-radius: 10px;
+}
+
+.workspace {
+  color: $text;
+  padding-top: 0.3rem;
+  padding-bottom: 0.2rem;
+  padding-right: 0.7rem;
+  padding-left: 0.7rem;
+  border-radius: 0.5rem;
+}
+
+.workspace-active {
+  background-color: $tone410;
+  color: $tone850;
+  padding-top: 0.3rem;
+  padding-bottom: 0.4rem;
+  padding-right: 0.7rem;
+  padding-left: 0.7rem;
+  border-radius: 0.5rem;
+}
+
+.workspace-empty {
+  color: $tone405;
+  padding-top: 0.3rem;
+  padding-bottom: 0.2rem;
+  padding-right: 0.7rem;
+  padding-left: 0.7rem;
+  border-radius: 0.5rem;
+}
+
+.workspace-e:hover {
+  opacity: 0.7;
+  border-radius: 0.5rem;
+}
+
+.workspace-ia-hover {
+  background-color: rgba($color: #ffffff, $alpha: 0.9);
+  color: $tone405;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+  border-radius: 7px;
+}
+
+.logo {
+  background-color: $tone850;
+  color: $tone405;
+  padding: 0 18px;
+  border-radius: 10px;
+  margin: 0 0.1rem 0 0;
+}
+
+.cava,
+.notif-hist {
+  border-radius: 10px;
+}
+
+.idle-i {
+  background-color: $tone850;
+  color: $text;
+  padding: 0 12px;
+  border-radius: 10px;
+}
+
+.cpu-t1 {
+  padding-right: 0px;
+  border-radius: 0;
+}
+
+.cpu-t2 {
+  background-color: $tone850;
+  color: #A1A1A1;
+  padding: 0 12px;
+  padding-left: 0px;
+  border-radius: 0 10px 10px 0;
+}
+
+
+
+/* System Tray */
+.systray {
+  background-color: $tone850;
+  color: $text;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+.systray menu {
+  border-radius: $borderRadius;
+  padding: 0.33em;
+  color: #EBDBB2;
+  background-color: $tone850;
+
+  menuitem {
+    padding: 0.25em;
+
+    arrow {
+      -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+      color: #ffffff;
+      min-width: 1em;
+      min-height: 1em;
+    }
+
+    radio {
+      min-width: 1em;
+      min-height: 1em;
+      padding-right: 0.5em;
+      -gtk-icon-source: -gtk-scaled(url("resource:///org/gnome/arc-theme/assets/radio-unchecked-dark.png"));
+
+      &:checked {
+        -gtk-icon-source: -gtk-scaled(url("resource:///org/gnome/arc-theme/assets/radio-checked-dark.png"));
+
+        &:hover {
+          -gtk-icon-source: -gtk-scaled(url("resource:///org/gnome/arc-theme/assets/radio-checked-selected.png"));
+        }
+      }
+
+      &:hover {
+        -gtk-icon-source: -gtk-scaled(url("resource:///org/gnome/arc-theme/assets/radio-unchecked-selected.png"));
+      }
+    }
+
+    check {
+      min-width: 1em;
+      min-height: 1em;
+      padding-right: 0.5em;
+      -gtk-icon-source: -gtk-scaled(url("resource:///org/gnome/arc-theme/assets/checkbox-unchecked-dark.png"));
+
+      &:checked {
+        -gtk-icon-source: -gtk-scaled(url("resource:///org/gnome/arc-theme/assets/checkbox-checked-dark.png"));
+
+        &:hover {
+          -gtk-icon-source: -gtk-scaled(url("resource:///org/gnome/arc-theme/assets/checkbox-checked-selected.png"));
+        }
+      }
+
+      &:hover {
+        -gtk-icon-source: -gtk-scaled(url("resource:///org/gnome/arc-theme/assets/checkbox-unchecked-selected.png"));
+      }
+    }
+
+    &:disabled label {
+      color: $tone700;
+    }
+
+    &:hover {
+      arrow {
+        color: $tone850;
+      }
+
+      background-color: #1D1E1D;
+      color: #ffffff;
+    }
+  }
+
+  separator {
+    background-color: $tone850;
+    padding-top: 0.06em;
+
+    &:last-child {
+      padding: unset;
+    }
+  }
+}
+
+.tray_box {
+  background-color: $tone850;
+  color: $text;
+  border-radius: 10px;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+menu {
+  background-color: #141617;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+menu>menuitem {
+  padding: 0.4rem 0.8rem;
+  transition: 0.1s;
+  border-radius: 1rem;
+}
+
+menu>menuitem:disabled {
+  color: #c0c0c0;
+  background-color: transparent;
+}
+
+menu>menuitem:hover {
+  color: #ffffff;
+  background-color: #1D1E1D;
+}
+
+menu>menuitem arrow {
+  -gtk-icon-source: -gtk-icontheme("go-next-symbolic");
+  color: #c9c9c9;
+  min-width: 1em;
+  min-height: 1em;
+}

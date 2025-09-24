@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sleep 0.5
+sleep 2
 
-swww init
+swww-daemon
 swww img ~/.config/wallpapers/desktop-background.png

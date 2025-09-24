@@ -1,0 +1,73 @@
+$tone950: #131313; // tone950
+$tone900: #1b1b1b; // tone900
+$tone850: #232323; // tone850
+$tone800: #363636; // tone800
+$tone750: #4c4c4c; // tone750
+$tone700: #606060; // tone700
+$tone650: #757575; // tone650
+$tone600: #8a8a8a; // tone600
+$tone550: #9f9f9f; // tone550
+$tone500: #b2b2b2; // tone500
+$tone450: #bfbfbf; // tone450
+$tone440: #c0c0c0; // tone440
+$tone430: #c2c2c2; // tone430
+$tone420: #c4c4c4; // tone420
+$tone410: #c5c5c5; // tone410
+$tone405: #c6c6c6; // tone405
+$tone380: #d7d7d7; // tone380
+$tone370: #d9d9d9; // tone370
+$tone360: #e1e1e1; // tone360
+$tone350: #e3e3e3; // tone350
+$tone340: #eaeaea; // tone340
+
+$color: #c9c9c9; // color
+$text: #d5d5d5; // text
+
+tooltip {
+  background-color: $tone700;
+  color: $text;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.divider-h {
+  min-height: 1px;
+  margin-top: 22px;
+  margin-bottom: 22px;
+  background-color: rgb(116, 116, 116);
+}
+
+.divider-v {
+  min-width: 3px;
+  min-height: 10px;
+  margin-right: 22px;
+  background-color: rgba(#ffffff, 0.5);
+}
+
+/* Bar */
+@import "./bar/bar.scss";
+@import "./bar/popup-menus/calendar/calendar.scss";
+@import "./bar/popup-menus/dashboard/dashboard.scss";
+@import "./bar/popup-menus/media/media.scss";
+@import "./bar/popup-menus/popups.scss";
+
+/* Dock */
+@import "./dock/dock.scss";
+
+/* Notifications */
+@import "./notifications/notifications.scss";
+
+/* Widgets */
+// Background Panel
+@import "./widgets/bg-panel/bg-panel.scss";
+// Activate Linux
+@import "./widgets/activate-linux/activate-linux.scss";
+
+@import "./lock/lock.scss";
+
+@import "./osd/osd.scss";
+
+* {
+  all: unset;
+  font-family: "Cantarell", "Noto Sans CJK JP", "JetBrainsMono Nerd Font Propo", "Nerd Font", sans-serif;
+}
