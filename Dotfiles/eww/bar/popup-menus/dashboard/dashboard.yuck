@@ -3,7 +3,6 @@
 (defpoll get_uptime :interval "1m" "uptime -p" )
 (defpoll gpu :interval "1s" `./bar/popup-menus/dashboard/scripts/getgpu.sh` )
 (deflisten volume "./bar/popup-menus/dashboard/scripts/getvol.sh" )
-(deflisten brightness "./bar/popup-menus/dashboard/scripts/getbrightness.sh" )
 
 (defwindow dash
   :namespace "dashboard"

@@ -93,11 +93,6 @@ PACKAGES=(
     "lib32-libva-mesa-driver"
     "libva"
 
-# Waydroid
-    "waydroid"
-    "python-gbinder"
-    "python-pyclip"
-
 # Misc packages
     "lxappearance"
     "xfce4-settings"
@@ -123,7 +118,6 @@ PACKAGES=(
     "btop"
     "pacman-contrib"
     "obs-studio"
-    "wine-staging"
     "openrazer-driver-dkms"
     "steam-native-runtime"
     "discord"
@@ -135,16 +129,12 @@ PACKAGES=(
     "zenpower3-dkms"
     "unzip"
     "unrar"
-    "winetricks"
-    "protontricks"
     "fuse2"
     "ntfs-3g"
     "spotify-adblock"
     "wl-clipboard"
     "flameshot-git"
     "jdk21-openjdk"
-    "opentabletdriver-git"
-    "lutris"
     "fd"
     "ripgrep"
 )

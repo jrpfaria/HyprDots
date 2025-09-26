@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-radeontop -d - -l 1 | grep -o 'gpu [0-9.]*%' | awk '{print int($2)}'
+amdgpu_top -gm | grep -m1 "average_gfx_activity" | awk -F': ' '{print $2}' | tr -d ','
