@@ -4,7 +4,6 @@
 (include "./bar/modules/cpu.yuck")
 (include "./bar/modules/memory.yuck")
 (include "./bar/modules/updates.yuck")
-(include "./bar/modules/cava.yuck")
 (include "./bar/modules/idle-inhibitor.yuck")
 (include "./bar/modules/network.yuck")
 (include "./bar/modules/audio.yuck")
@@ -93,7 +92,6 @@
       :spacing 10
       :space-evenly false
       (updates)
-      (cava)
       ;; (idle-inhibitor)
     )
     
